@@ -4,29 +4,29 @@ package estructuras;
  * Pila generica (LIFO) implementada con nodos enlazados.
  */
 public class Pila<T> {
-    private Nodo<T> tope;
-    private int tamano;
+    private Nodo<T> cima;
+    private int tamanio;
 
     public Pila() {
-        this.tope = null;
-        this.tamano = 0;
+        this.cima = null;
+        this.tamanio = 0;
     }
 
-    // El nuevo nodo apunta al tope anterior y pasa a ser el tope: O(1)
+    // El nuevo nodo apunta al cima anterior y pasa a ser el cima: O(1)
     public void apilar(T valor) {
         Nodo<T> nuevo = new Nodo<>(valor);
-        nuevo.setSiguiente(tope);
-        tope = nuevo;
-        tamano++;
+        nuevo.setSiguiente(cima);
+        cima = nuevo;
+        tamanio++;
     }
 
     public T desapilar() {
         if (estaVacia()) {
             throw new IllegalStateException("La pila está vacía");
         }
-        T valor = tope.getValor();
-        tope = tope.getSiguiente();
-        tamano--;
+        T valor = cima.getValor();
+        cima = cima.getSiguiente();
+        tamanio--;
         return valor;
     }
 
@@ -35,15 +35,15 @@ public class Pila<T> {
         if (estaVacia()) {
             throw new IllegalStateException("La pila está vacía");
         }
-        return tope.getValor();
+        return cima.getValor();
     }
 
     public boolean estaVacia() {
-        return tope == null;
+        return cima == null;
     }
 
     public int tamano() {
-        return tamano;
+        return tamanio;
     }
 
     // Recorre de la cima al fondo
@@ -53,7 +53,7 @@ public class Pila<T> {
             return "(vacía)";
         }
         StringBuilder sb = new StringBuilder();
-        Nodo<T> actual = tope;
+        Nodo<T> actual = cima;
         while (actual != null) {
             sb.append(actual.getValor());
             if (actual.getSiguiente() != null) {
